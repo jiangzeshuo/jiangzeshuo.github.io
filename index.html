@@ -29,30 +29,44 @@
       switchTab();
       window.addEventListener('hashchange', switchTab, false);
   })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Hexo" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item is-active" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2024-01-23T00:44:54.448Z" title="2024/1/23 08:44:54">2024-01-23</time></span><span class="level-item">Updated&nbsp;<time dateTime="2024-01-22T10:06:30.560Z" title="2024/1/22 18:06:30">2024-01-22</time></span><span class="level-item">2 minutes read (About 289 words)</span></div></div><div class="content"><p>C++</p>
-<p>int类型4字节</p>
-<p>float类型在32位中是4字节 在64位中是8字节</p>
-<p>像Java是没有指针的，同时也不对程序员暴露其元素的地址，寻址操作完全交给虚拟机。</p>
-<p>C++在二维数组中连续，在一维数组中不连续</p>
-<p>右移一维相当于除以2</p>
-<p>二分查找的一些技巧：</p>
-<p><strong>前提是数组为有序数组</strong>，同时题目还强调<strong>数组中无重复元素</strong></p>
-<p>如果是边界应该如何判断</p>
-<p>因为取mid值时已经对比了和目标值的是否匹配，所以在之后确定边界时可以加一减一操作</p>
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Hexo" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item is-active" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2024-01-23T00:44:54.448Z" title="2024/1/23 08:44:54">2024-01-23</time></span><span class="level-item">Updated&nbsp;<time dateTime="2024-01-23T03:40:32.629Z" title="2024/1/23 11:40:32">2024-01-23</time></span><span class="level-item">3 minutes read (About 455 words)</span></div></div><div class="content"><h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><h2 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h2><p><strong>数组是存放在连续内存空间上的相同类型数据的集合。</strong></p>
+<h2 id="知识"><a href="#知识" class="headerlink" title="知识"></a>知识</h2><ol>
+<li>C++：int类型4字节float类型在32位中是4字节 在64位中是8字节</li>
+<li>Java的一维数组是连续的，二维数组在内存中不是连续地址空间</li>
+<li>右移一维相当于除以2</li>
+<li>k–是最后减去k&#x3D;1 i&#x3D;k–；之后i&#x3D;1，k&#x3D;0</li>
+</ol>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><h3 id="二分法"><a href="#二分法" class="headerlink" title="二分法"></a>二分法</h3><p><strong>前提是数组为有序数组</strong>，同时题目还强调<strong>数组中无重复元素</strong>，解决思路：两个边界，让左边界小于等于右边界通过比较mid与目标的值，来修改两个边界，直到找到目标值。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-search/">https://leetcode.cn/problems/binary-search/</a></p>
+<h5 id="Q：二分的边界应该如何判断？"><a href="#Q：二分的边界应该如何判断？" class="headerlink" title="Q：二分的边界应该如何判断？"></a>Q：二分的边界应该如何判断？</h5><p><strong>优势1：</strong>因为取mid值时已经对比了和目标值的是否匹配，所以在之后确定边界时可以加一减一操作</p>
+<img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210311153055723.jpg" style="zoom:50%;" />
+
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if (guess == target) &#123;</span><br><span class="line">    return midOfIndex;</span><br><span class="line">&#125; else if (guess &lt; target) &#123;</span><br><span class="line">    minOfIndex = midOfIndex + 1;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    maxOfIndex = midOfIndex - 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>然后这样在while循环中设置一个<strong>小于等于</strong>，就可以在最后一次判断是否等于边界</p>
+<p><strong>优势2：</strong>在while循环中设置一个<strong>小于等于</strong>，就可以在最后一次判断是否等于边界</p>
 <p>例如{0,1,2,3,4}找4</p>
 <p>right_index：0 left_index：4</p>
 <p> right_index：3 left_index：4</p>
 <p> right_index：4 left_index：4</p>
-<p>奇数和偶数数组有没有必要考虑</p>
-<p>一个数的数组有没有必要考虑</p>
-<p>其他方法需要，上述代码不用</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">temp[k--]</span><br></pre></td></tr></table></figure>
+<h5 id="Q：奇数和偶数数组有没有必要考虑？一个数的数组有没有必要考虑"><a href="#Q：奇数和偶数数组有没有必要考虑？一个数的数组有没有必要考虑" class="headerlink" title="Q：奇数和偶数数组有没有必要考虑？一个数的数组有没有必要考虑"></a>Q：奇数和偶数数组有没有必要考虑？一个数的数组有没有必要考虑</h5><p>其他方法需要，上述代码不用</p>
+<h3 id="双指针法"><a href="#双指针法" class="headerlink" title="双指针法"></a>双指针法</h3><p>特点是<strong>通过一个快指针和慢指针在一个for循环下完成两个for循环的工作。</strong>，主要问题就是两个指针的作用，一个用于寻找想要的值，一个用与确定目前索引</p>
+<p>有两种实现一种是从两边开始，while保证left&lt;&#x3D;right；从一边开始 index&lt;length</p>
+<ul>
+<li>暴力解法时间复杂度：O(n^2)</li>
+<li>双指针时间复杂度：O(n)</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-element/description/">https://leetcode.cn/problems/remove-element/description/</a></p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/squares-of-a-sorted-array/">https://leetcode.cn/problems/squares-of-a-sorted-array/</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class Solution2 &#123;</span><br><span class="line">    public int removeElement(int[] nums, int val) &#123;</span><br><span class="line">        int fast_Index = 0;</span><br><span class="line">        int slow_Index = 0;</span><br><span class="line">        while(fast_Index &lt; nums.length)&#123;</span><br><span class="line">            if(nums[fast_Index] != val)&#123;</span><br><span class="line">                nums[slow_Index] = nums[fast_Index];</span><br><span class="line">                slow_Index++;</span><br><span class="line">            &#125;</span><br><span class="line">            fast_Index++;</span><br><span class="line">        &#125;</span><br><span class="line">        return slow_Index;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>是最后减去</p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2024-01-21T08:12:49.508Z" title="2024/1/21 16:12:49">2024-01-21</time></span><span class="level-item">Updated&nbsp;<time dateTime="2024-01-21T09:00:13.652Z" title="2024/1/21 17:00:13">2024-01-21</time></span><span class="level-item">a minute read (About 123 words)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/01/21/hello-world/">myFirst Blog</a></p><div class="content"><p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h3 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h3><p>滑动窗口的思想就是两个指针前边指针用于确定窗口大小，后边指针用于缩小窗口以此为一个循环。循环到底是前指针指到最后。</p>
+<p>也可以用于解决失败超时问题</p>
+<ul>
+<li>暴力解法时间复杂度：O(n^2)</li>
+<li>滑动窗口时间复杂度：O(n)</li>
+</ul>
+<h3 id="模拟"><a href="#模拟" class="headerlink" title="模拟"></a>模拟</h3><p>遵循<strong>循环不变量原则</strong>，这样就可以保证，每个边循环次数固定，比如如图所示每个边循环都是2 这样写起来就很简答。</p>
+<img src="C:\Users\97265\AppData\Roaming\Typora\typora-user-images\image-20240123113812955.png" alt="image-20240123113812955" style="zoom:67%;" /></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2024-01-21T08:12:49.508Z" title="2024/1/21 16:12:49">2024-01-21</time></span><span class="level-item">Updated&nbsp;<time dateTime="2024-01-21T09:00:13.652Z" title="2024/1/21 17:00:13">2024-01-21</time></span><span class="level-item">a minute read (About 123 words)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/01/21/hello-world/">myFirst Blog</a></p><div class="content"><p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>More infoGGGGGGG: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
