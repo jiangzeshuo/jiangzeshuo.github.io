@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>1、用户数据分析 - JzsBlog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="JiangZeshuo"><meta name="msapplication-TileImage" content="/img/avatar.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="JiangZeshuo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="协同过滤算法简介它基于用户之间的相似性或项目之间的相似性来进行推荐，基于用户行为分析的推荐算法是个性化推荐系统的重要算法。顾名思义，协同过滤就是指用户可以齐心协力，通过不断地和网站互动，使自己的推荐列表能够不断过滤掉自己不感兴趣的物品，从而越来越满足自己的需求。"><meta property="og:type" content="blog"><meta property="og:title" content="1、用户数据分析"><meta property="og:url" content="https://jiangzeshuo.github.io/2024/04/29/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E5%88%A9%E7%94%A8%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE/"><meta property="og:site_name" content="JzsBlog"><meta property="og:description" content="协同过滤算法简介它基于用户之间的相似性或项目之间的相似性来进行推荐，基于用户行为分析的推荐算法是个性化推荐系统的重要算法。顾名思义，协同过滤就是指用户可以齐心协力，通过不断地和网站互动，使自己的推荐列表能够不断过滤掉自己不感兴趣的物品，从而越来越满足自己的需求。"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428202551871.png"><meta property="og:image" content="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428203011387.png"><meta property="og:image" content="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428203445323.png"><meta property="og:image" content="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428204521721.png"><meta property="og:image" content="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428205256280.png"><meta property="og:image" content="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428205802722.png"><meta property="og:image" content="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428205830428.png"><meta property="og:image" content="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428210605895.png"><meta property="og:image" content="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428211803091.png"><meta property="og:image" content="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428212256081.png"><meta property="og:image" content="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428212915987.png"><meta property="og:image" content="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428213101675.png"><meta property="og:image" content="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428213215299.png"><meta property="og:image" content="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428213722125.png"><meta property="og:image" content="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428214102284.png"><meta property="og:image" content="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428214419275.png"><meta property="og:image" content="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428214619215.png"><meta property="article:published_time" content="2024-04-29T01:35:19.844Z"><meta property="article:modified_time" content="2024-04-29T01:36:44.493Z"><meta property="article:author" content="jzs"><meta property="article:tag" content="推荐系统"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428202551871.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jiangzeshuo.github.io/2024/04/29/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E5%88%A9%E7%94%A8%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE/"},"headline":"1、用户数据分析","image":["https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428202551871.png","https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428203011387.png","https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428203445323.png","https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428204521721.png","https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428205256280.png","https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428205802722.png","https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428205830428.png","https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428210605895.png","https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428211803091.png","https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428212256081.png","https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428212915987.png","https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428213101675.png","https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428213215299.png","https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428213722125.png","https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428214102284.png","https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428214419275.png","https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428214619215.png"],"datePublished":"2024-04-29T01:35:19.844Z","dateModified":"2024-04-29T01:36:44.493Z","author":{"@type":"Person","name":"jzs"},"publisher":{"@type":"Organization","name":"JzsBlog","logo":{"@type":"ImageObject","url":"https://jiangzeshuo.github.io/img/avatar.png"}},"description":"协同过滤算法简介它基于用户之间的相似性或项目之间的相似性来进行推荐，基于用户行为分析的推荐算法是个性化推荐系统的重要算法。顾名思义，协同过滤就是指用户可以齐心协力，通过不断地和网站互动，使自己的推荐列表能够不断过滤掉自己不感兴趣的物品，从而越来越满足自己的需求。"}</script><link rel="canonical" href="https://jiangzeshuo.github.io/2024/04/29/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E5%88%A9%E7%94%A8%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE/"><link rel="icon" href="/img/avatar.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/avatar.png" alt="JzsBlog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/jiangzeshuo"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2024-04-29T01:35:19.844Z" title="2024/4/29 09:35:19">2024-04-29</time></span><span class="level-item">Updated&nbsp;<time dateTime="2024-04-29T01:36:44.493Z" title="2024/4/29 09:36:44">2024-04-29</time></span><span class="level-item">38 minutes read (About 5671 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">1、用户数据分析</h1><div class="content"><h1 id="协同过滤算法简介"><a href="#协同过滤算法简介" class="headerlink" title="协同过滤算法简介"></a>协同过滤算法简介</h1><p>它基于用户之间的相似性或项目之间的相似性来进行推荐，基于用户行为分析的推荐算法是个性化推荐系统的重要算法。顾名思义，协同过滤就是指用户可以齐心协力，通过不断地和网站互动，使自己的推荐列表能够不断过滤掉自己不感兴趣的物品，从而越来越满足自己的需求。 </p>
+<span id="more"></span>
+<h1 id="用户行为数据"><a href="#用户行为数据" class="headerlink" title="用户行为数据"></a>用户行为数据</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>很多的用户行为数据都会以日志的形式 ，但是一般使用的都是会话日志（ session log）  其中每个会话表示一次用户行为和对应的服务。比如，在搜索引擎和搜索广告系统中，服务会为每次查询生成一个展示日志（ impression log），其中记录了查询和返回结果。如果用户点击了某个结果，这个点击信息会被服务器截获并存储在点击日志（ click log）中  。得到的会话日志中每个消息是一个用户提交的查询、得到的结果以及点击。  </p>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p>用户行为一般分为显性反馈行为（ explicit feedback）和隐性反馈行为（ implicit feedback）。  比如喜欢&#x2F;不喜欢，购买差评都是显性反馈行为  。  用户浏览一个物品 ，用户点击界面。显性反馈行为和隐性反馈行为的比较如下。</p>
+<p><img src="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428202551871.png" alt="image-20240428202551871"></p>
+<h1 id="用户行为分析"><a href="#用户行为分析" class="headerlink" title="用户行为分析"></a>用户行为分析</h1><h2 id="长尾效应"><a href="#长尾效应" class="headerlink" title="长尾效应"></a>长尾效应</h2><p>指那些原来不受到重视的销量小但种类多的产品或服务由于总量巨大，累积起来的总收益超过主流产品的现象。  <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-hans/%E9%95%BF%E5%B0%BE">维基</a></p>
+<p>下图是Delicious和CiteULike数据集中物品流行度的分布曲线。横坐标是物品的流行度K，纵坐标是流行度为K的物品的总数。这里，物品的流行度指对物品产生过行为的用户总数。  完美的展现了展示了长尾效应。</p>
+<p><img src="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428203011387.png" alt="image-20240428203011387"></p>
+<h2 id="用户活跃度和物品流行度的关系"><a href="#用户活跃度和物品流行度的关系" class="headerlink" title="用户活跃度和物品流行度的关系"></a>用户活跃度和物品流行度的关系</h2><p>一般认为，新用户倾向于浏览热门的物品，因为他们对网站还不熟悉，只能点击首页的热门物品，而老用户会逐渐开始浏览冷门的物品。图2-5展示了MovieLens数据集中用户活跃度和物品流行度之间的关系，其中横坐标是用户活跃度，纵坐标是具有某个活跃度的所有用户评过分的物品的平均流行度。这表明用户越活跃，越倾向于浏览冷门的物品。  所以为了留住用户，我们就需要进行个性化的推荐。</p>
+<p><img src="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428203445323.png" alt="image-20240428203445323"></p>
+<h1 id="实验准备"><a href="#实验准备" class="headerlink" title="实验准备"></a>实验准备</h1><p>本章采用GroupLens提供的MovieLens数据集介绍和评测各种算法。 MovieLens数据集有3个不同的版本，本章选用中等大小的数据集，着重研究隐反馈数据集中的TopN推荐问题  。</p>
+<p><strong>测评指标：</strong></p>
+<p>精度：通过准确率&#x2F;召回率评测推荐算法的精度</p>
+<p>覆盖率：反映了推荐算法发掘长尾的能力  </p>
+<p>新颖度  ：如果推荐出的物品都很热门，说明推荐的新颖度较低，否则说明推荐结果比较新颖。  </p>
+<h1 id="基于邻域的算法"><a href="#基于邻域的算法" class="headerlink" title="基于邻域的算法"></a>基于邻域的算法</h1><p>基于邻域的算法分为两大类，一类是基于用户的协同过滤算法，另一类是基于物品的协同过滤算法。  </p>
+<h2 id="基于用户的协同过滤算法"><a href="#基于用户的协同过滤算法" class="headerlink" title="基于用户的协同过滤算法"></a>基于用户的协同过滤算法</h2><p>在一个在线个性化推荐系统中，当一个用户A需要个性化推荐时，可以先找到和他有相似兴趣的其他用户，然后把那些用户喜欢的、而用户A没有听说过的物品推荐给A。这种方法称为基于用户的协同过滤算法。</p>
+<p>主要包括如下两个步骤</p>
+<ol>
+<li>找到和目标用户兴趣相似的用户集合。</li>
+<li>找到这个集合中的用户喜欢的，且目标用户没有听说过的物品推荐给目标用户</li>
+</ol>
+<h3 id="步骤1："><a href="#步骤1：" class="headerlink" title="步骤1："></a>步骤1：</h3><p><strong>兴趣相似度：</strong></p>
+<p>$w_{uv}&#x3D;\frac{\left|N(u)\cap N(v)\right|}{\left|N(u)\cup N(v)\right|}$</p>
+<p><strong>余弦兴趣相似度：</strong></p>
+<p>$w_{uv}&#x3D;\frac{\left|N(u)\cap N(v)\right|}{\sqrt{\left|N(u)\right|\left|N(v)\right|}}$</p>
+<p><strong>举例</strong></p>
+<p><img src="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428204521721.png" alt="image-20240428204521721"></p>
+<p>一个小技巧：在计算相似度时当用每个用户与每个用户计算相似度时间复杂度是O(|U|*|U|)  U是用户个数，但是很多的用户并没有相似的交集所以</p>
+<p>我们可以进行物品到用户的倒排表，对于每个物品都保存对该物品产生过行为的用户列表 。从而，可以扫描倒排表中每个物品对应的用户列表，将用户列表中的两两用户对应的C[u][v]加1，最终就可以得到所有用户之间不为0的。</p>
+<p><img src="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428205256280.png" alt="image-20240428205256280"></p>
+<h3 id="步骤2："><a href="#步骤2：" class="headerlink" title="步骤2："></a>步骤2：</h3><p>得到用户之间的兴趣相似度后， 可以通过UserCF算法中<strong>用户u</strong>对<strong>物品i</strong>的感兴趣程度 ：</p>
+<p>$p(u,i)&#x3D;\sum_{v\in S(u,K)\cap N(i)}w_{u\nu}r_{vi}$</p>
+<p>S(u, K)包含和用户u兴趣最接近的K个用户， N(i)是对物品i有过行为的用户集合，所以v是即对物品i感兴趣又与用户u有一定相似度的用户。${w_{uv}}$是用户u和用户v的兴趣相似度，${r_{vi}}$代表用户v对物品i的兴趣  </p>
+<h3 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h3><p>UserCF的准确率和召回率相对MostPopular算法提高了将近1倍。同时， UserCF的覆盖率远远高于MostPopular，推荐结果相对MostPopular不太热门。  </p>
+<p>并且K值影响着流行度可以看到，随着额K越大则UserCF推荐结果就越热门。这是因为K决定了UserCF在给你做推荐时参考多少和你兴趣相似的其他用户的兴趣，那么如果K越大，参考的人越多，结果就越来越趋近于全局热门的物品。  K越大则UserCF推荐结果的覆盖率越低。覆盖率的降低是因为流行度的增加，随着流行度增加， UserCF越来越倾向于推荐热门的物品，  从而对长尾物品的推荐越来越少，因此造成了覆盖率的降低  。</p>
+<p><img src="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428205802722.png" alt="image-20240428205802722"></p>
+<p><img src="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428205830428.png" alt="image-20240428205830428"></p>
+<h3 id="改进User-IIF"><a href="#改进User-IIF" class="headerlink" title="改进User-IIF"></a>改进User-IIF</h3><p>两个用户对冷门物品采取过同样的行为更能说明他们兴趣的相似度。  对于热门商品（比如新华字典）两人都购买但是并不能显示他们的相似度</p>
+<p>所以改进相似度计算公式：</p>
+<p>$w_{uv}&#x3D;\frac{\sum_{i\in N(u)\cap N(v)}\frac{1}{\log1+\left|N(i)\right|}}{\sqrt{\left|N(u)\right|\left|N(v)\right|}}$</p>
+<p>对于物品i如果他的交互用户很多，那么分子部分就很很小，这样就是对热门商品的惩罚。</p>
+<p>效果：经过对热门商品的惩罚，可以看到覆盖率的提升和流行度的下降证明推荐系统在变好。</p>
+<p><img src="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428210605895.png" alt="image-20240428210605895"></p>
+<h2 id="基于物品的协同过滤算法"><a href="#基于物品的协同过滤算法" class="headerlink" title="基于物品的协同过滤算法"></a>基于物品的协同过滤算法</h2><p>基于物品的协同过滤算法（简称ItemCF）给用户推荐那些和他们之前喜欢的物品相似的物品 。不过， ItemCF算法并不利用物品的内容属性计算物品之间的相似度，它主要通过分析用户的行为记录计算物品之间的相似度。  </p>
+<p>主要包括如下两个步骤</p>
+<ol>
+<li>计算物品之间的相似度。</li>
+<li>根据物品的相似度和用户的历史行为给用户生成推荐列表。</li>
+</ol>
+<h3 id="步骤1：-1"><a href="#步骤1：-1" class="headerlink" title="步骤1："></a>步骤1：</h3><p>$w_{ij}&#x3D;\frac{\left|N(i)\cap N(j)\right|}{\left|N(i)\right|}$</p>
+<p>这里，分母|N(i)|是喜欢物品i的用户数，而分子 N i N j ( ) ( )  是同时喜欢物品i和物品j的用户数。因此，上述公式可以理解为喜欢物品i的用户中有多少比例的用户也喜欢物品j。  </p>
+<p>为了避免推荐出热门的物品，可以用下面的公式：  </p>
+<p>$w_{ij}&#x3D;\frac{\left|N(i)\cap N(j)\right|}{\sqrt{\left|N(i)\right|\left|N(j)\right|}}$</p>
+<p>如果物品j是人们物品那么会增大分母进而对权重进行惩罚。</p>
+<p>Q：为什么计算谁喜欢这个物品可以代表物品之间的相似度。</p>
+<p>A:在协同过滤中两个物品产生相似度是因为它们共同被很多用户喜欢，也就是说每个用户都可以通过他们的历史兴趣列表给物品“贡献”相似度。这里面蕴涵着一个假设，就是每个用户的兴趣都局限在某几个方面，因此如果两个物品属于一个用户的兴趣列表，那么这两个物品可能就属于有限的几个领域，而如果两个物品属于很多用户的兴趣列表，那么它们就可能属于同一个领域，因而有很大的相似度。  </p>
+<h3 id="步骤2：-1"><a href="#步骤2：-1" class="headerlink" title="步骤2："></a>步骤2：</h3><p>在得到物品之间的相似度后， ItemCF通过如下公式计算用户u对一个物品j的兴趣：  </p>
+<p>$p_{uj}&#x3D;\sum_{i\in N(u)\cap S(j,K)}w_{ji}r_{ui}$</p>
+<p>这里N(u)是用户喜欢的物品的集合， S(j,K)是和物品j最相似的K个物品的集合， 所以i属于用户u喜欢的物品并且还和i有相关性的物品。${w_{ij}}$是物品j和i的相似度，${r_{ui}}$​是用户u对物品i的兴趣。  该公式的含义是，和用户历史上感兴趣的物品越相似的物品，越有可能在用户的推荐列表中获得比较高的排名。</p>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><p>用户喜欢《 C++ Primer中文版》和《编程之美》两本书。然后ItemCF会为这两本书分别找出和它们最相似的3本书，然后根据公式的定义计算用户对每本书的感兴趣程度。比如， ItemCF给用户推荐《算法导论》，是因为这本书和《 C++ Primer中文版》相似，相似度为0.4，而且这本书也和《编程之美》相似，相似度是0.5。考虑到用户对《 C++ Primer中文版》的兴趣度是1.3，对《编程之美》的兴趣度是0.9，那么用户对《算法导论》的兴趣度就是1.3 （${r_{ui}}$）× 0.4 ${w_{ij}}$+ 0.9× 0.5 &#x3D; 0.97  </p>
+<p><img src="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428211803091.png" alt="image-20240428211803091"></p>
+<h3 id="结果："><a href="#结果：" class="headerlink" title="结果："></a>结果：</h3><p><img src="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428212256081.png" alt="image-20240428212256081"></p>
+<h3 id="改进ItemCF-IUF"><a href="#改进ItemCF-IUF" class="headerlink" title="改进ItemCF-IUF"></a>改进ItemCF-IUF</h3><p>用户活跃度对数的倒数的参数，他也认为活跃用户对物品相似度的贡献应该小于不活跃的用户。</p>
+<p>$w_{ij}&#x3D;\frac{\sum_{u\in N(i)\cap N(j)}\frac{1}{\log1+\left|N(u)\right|}}{\sqrt{\left|N(i)\right|\left|N(j)\right|}}$</p>
+<p>N(i)N(j)是同时喜欢物品i和物品j的用户  ，N(u)是代表用户u喜欢的物品数目，这样可以减少异常活跃用户对于相关性的影响</p>
+<p>ItemCF-IUF在准确率和召回率两个指标上和ItemCF相近，但ItemCF-IUF明显提高了推荐结果的覆盖率，降低了推荐结果的流行度  </p>
+<p><img src="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428212915987.png" alt="image-20240428212915987"></p>
+<h3 id="改进ItemCF-Norm"><a href="#改进ItemCF-Norm" class="headerlink" title="改进ItemCF-Norm"></a>改进ItemCF-Norm</h3><p>假设物品分为两类——A和B， A类物品之间的相似度为0.5， B类物品之间的相似度为0.6，而A类物品和B类物品之间的相似度是0.2。在这种情况下，如果一个用户喜欢了5个A类物品和5个B类物品，用ItemCF给他进行推荐，推荐的就都是B类物品，因为B类物品之间的相似度大。但如果归一化之后， A类物品之间的相似度变成了1， B类物品之间的相似度也是1，那么这种情况下，用户如果喜欢5个A类物品和5个B类物品，那么他的推荐列表中A类物品和B类物品的数目也应该是大致相等的。  </p>
+<p>$w_{ij}^{‘}&#x3D;\frac{w_{ij}}{\max_{j}w_{ij}}$</p>
+<p><img src="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428213101675.png" alt="image-20240428213101675"></p>
+<h2 id="UserCF和ItemCF的综合比较"><a href="#UserCF和ItemCF的综合比较" class="headerlink" title="UserCF和ItemCF的综合比较"></a>UserCF和ItemCF的综合比较</h2><p><img src="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428213215299.png" alt="image-20240428213215299"></p>
+<p>为什么原始ItemCF算法的覆盖率和新颖度都不高  </p>
+<p>如果j非常热门，那么上面公式的分子$\begin{vmatrix}N(i)\cap N(j)\end{vmatrix}$就会越来越接近 $\begin{vmatrix}N(i)\end{vmatrix}$。尽管上面的公式分母已经考虑到了j的流行度，但在实际应用中，热门的j仍然会获得比较大的相似度。  </p>
+<p>解决方案我们可以在分母上加大对热门物品的惩罚，  通过提高α，就可以惩罚热门的j。  </p>
+<p>$w_{ij}&#x3D;\frac{\left|N(i)\cap N(j)\right|}{\left|N(i)\right|^{1-\alpha}\left|N(j)\right|^\alpha}$</p>
+<h1 id="隐语义模型"><a href="#隐语义模型" class="headerlink" title="隐语义模型"></a>隐语义模型</h1><p>LFM（ latent factor model）隐语义模型  用于找到文本的隐含语义  </p>
+<p>如果要推荐一本书处理上述的user-CF和item-CF还有一种方法，可以对书和物品的兴趣进行分类。对于某个用户，首先得到他的兴趣分类，然后从分类中挑选他可能喜欢的物品。  </p>
+<p>LFM通过如下公式计算用户u对物品i的兴趣：  这个公式中${p_{u,k}}$, 和${q_{i,k}}$ 是模型的参数，其中${p_{u,k}}$,度量了用户u的兴趣和第k个隐类的关系，而${q_{i,k}}$ , 度量了第k个隐类和物品i之间的关系。  </p>
+<p><img src="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428213722125.png" alt="image-20240428213722125"></p>
+<p>LFM在隐性反馈数据 如何生成负样本</p>
+<p>对于一个用户，从他没有过行为的物品中均匀采样出一些物品作为负样本。  </p>
+<p>采样原则</p>
+<ol>
+<li>对每个用户，要保证正负样本的平衡（数目相似）。</li>
+<li>对每个用户采样负样本时，要选取那些很热门，而用户却没有行为的物品。</li>
+</ol>
+<p>损失函数是均方误差，优化方法随机梯度下降法 来对训练集进行训练。</p>
+<p>结果</p>
+<p>表中展示了4个隐类中排名最高（ qik最大）的一些电影。结果表明，每一类的电影都是合理的，都代表了一类用户喜欢看的电影。从而说明LFM确实可以实现通过用户行为将物品聚类的功能。  </p>
+<p><img src="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428214102284.png" alt="image-20240428214102284"></p>
+<h2 id="LFM和基于邻域的方法的比较"><a href="#LFM和基于邻域的方法的比较" class="headerlink" title="LFM和基于邻域的方法的比较"></a>LFM和基于邻域的方法的比较</h2><ol>
+<li>理论基础 LFM具有比较好的理论基础，它是一种学习方法，通过优化一个设定的指标建立最优的模型。基于邻域的方法更多的是一种基于统计的方法，并没有学习过程。</li>
+<li>离线计算的空间复杂度 基于邻域的方法需要维护一张离线的相关表。在离线计算相关表的过程中，如果用户&#x2F;物品数很多，将会占据很大的内存。假设有M个用户和N个物品，在计算相关表的过程中，我们可能会获得一张比较稠密的临时相关表（尽管最终我们对每个物品只保留K个最相关的物品，但在中间计算过程中稠密的相关表是不可避免的），那么假设是用户相关表，则需要O(M<em>M)的空间，而对于物品相关表，则需要O(N</em>N)的空间。而LFM在建模过程中，如果是F个隐类，那么它需要的存储空间是O(F*(M+N))，这在M和N很大时可以很好地节省离线计算的内存。在Netflix Prize中，因为用户数很庞大（ 40多万），很少有人使用UserCF算法（据说需要30 GB左右的内存），而LFM由于大量节省了训练过程中的内存（只需要4 GB），从而成为Netflix Prize中最流行的算法。</li>
+<li>在线实时推荐 UserCF和ItemCF在线服务算法需要将相关表缓存在内存中，然后可以在线进行实时的预测。以ItemCF算法为例，一旦用户喜欢了新的物品，就可以通过查询内存中的相关表将和该物品相似的其他物品推荐给用户。因此，一旦用户有了新的行为，而且该行为被实时地记录到后台的数据库系统中，他的推荐列表就会发生变化。 而从LFM的预测公式可以看到， LFM在给用户生成推荐列表时，需要计算用户对所有物品的兴趣权重，然后排名，返回权重最大的N个物品。那么，在物品数很多时，这一过程的时间复杂度非常高，可达O(M<em>N</em>F)。因此， LFM不太适合用于物品数非常庞大的系统，如果要用，我们也需要一个比较快的算法给用户先计算一个比较小的候选列表，然后再用LFM重新排名。另一方面， LFM在生成一个用户推荐列表时速度太慢，因此不能在线实时计算，而需要离线将所有用户的推荐结果事先计算好存储在数据库中。因此， LFM不能进行在线实时推荐，也就是说，当用户有了新的行为后，他的推荐列表不会发生变化。</li>
+<li>推荐解释 ItemCF算法支持很好的推荐解释，它可以利用用户的历史行为解释推荐结果。但LFM无法提供这样的解释，它计算出的隐类虽然在语义上确实代表了一类兴趣和物品，却很难用自然语言描述并生成解释展现给用户。</li>
+</ol>
+<h2 id="基于图的模型"><a href="#基于图的模型" class="headerlink" title="基于图的模型"></a>基于图的模型</h2><p>将用户行为表示为二分图模型后， 下面的任务就是在二分图上给用户进行个性化推荐。如果将个性化推荐算法放到二分图模型上，那么给用户u推荐物品的任务就可以转化为度量用户顶点vu和与vu没有边直接相连的物品节点在图上的相关性  </p>
+<p>度量图中两个顶点之间相关性的方法很多，但一般来说图中顶点的相关性主要取决于下面：</p>
+<ol>
+<li>两个顶点之间的路径数；</li>
+<li>两个顶点之间路径的长度；</li>
+<li>两个顶点之间的路径经过的顶点</li>
+</ol>
+<p>而相关性高的一对顶点一般具有如下特征：</p>
+<ol>
+<li>两个顶点之间有很多路径相连；</li>
+<li>连接两个顶点之间的路径长度都比较短；</li>
+<li>连接两个顶点之间的路径不会经过出度比较大的顶点。</li>
+</ol>
+<p>举例</p>
+<p>举一个简单的例子，如图2-19所示，用户A和物品c、 e没有边相连，但是用户A和物品c有两条长度为3的路径相连，用户A和物品e有两条长度为3的路径相连。那么，顶点A与e之间的相关性要高于顶点A与c，因而物品e在用户A的推荐列表中应该排在物品c之前，因为顶点A与e之间有两条路径——（ A, b, C, e）和（ A, d, D, e）。其中， （ A, b, C, e）路径经过的顶点的出度为（ 3, 2, 2, 2），而（ A, d, D, e）路径经过的顶点的出度为（ 3, 2, 3, 2）。因此， （ A, d, D, e）经过了一个出度比较大的顶点D，所以（ A, d, D, e）对顶点A与e之间相关性的贡献要小于（ A, b, C, e）  </p>
+<p><img src="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428214419275.png" alt="image-20240428214419275"></p>
+<p>假设要给用户u进行个性化推荐，可以从用户u对应的节点vu开始在用户物品二分图上进行随机游走。游走到任何一个节点时，首先按照概率α 决定是继续游走，还是停止这次游走并从vu节点开始重新游走。如果决定继续游走，那么就从当前节点指向的节点中按照均匀分布随机选择一个节点作为游走下次经过的节点。  </p>
+<p><img src="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240428214619215.png" alt="image-20240428214619215"></p>
+<p>虽然PersonalRank算法可以通过随机游走进行比较好的理论解释，但该算法在时间复杂度上有明显的缺点。因为在为每个用户进行推荐时，都需要在整个用户物品二分图上进行迭代，直到整个图上的每个顶点的PR值收敛。这一过程的时间复杂度非常高，不仅无法在线提供实时推荐，甚至离线生成推荐结果也很耗时。  </p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>1、用户数据分析</p><p><a href="https://jiangzeshuo.github.io/2024/04/29/第二章-利用用户数据/">https://jiangzeshuo.github.io/2024/04/29/第二章-利用用户数据/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>jzs</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2024-04-29</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2024-04-29</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/">推荐系统</a></div><div class="bdsharebuttonbox"><a class="bds_more" href="#" data-cmd="more"></a><a class="bds_qzone" href="#" data-cmd="qzone" title="分享到QQ空间"></a><a class="bds_tsina" href="#" data-cmd="tsina" title="分享到新浪微博"></a><a class="bds_tqq" href="#" data-cmd="tqq" title="分享到腾讯微博"></a><a class="bds_renren" href="#" data-cmd="renren" title="分享到人人网"></a><a class="bds_weixin" href="#" data-cmd="weixin" title="分享到微信"></a></div><script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2024/04/29/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D/"><span class="level-item">1、推荐系统简洁</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="SOHUCS" sid="2024/04/29/第二章-利用用户数据/"></div><script charset="utf-8" src="https://changyan.sohu.com/upload/changyan.js"></script><script>window.changyan.api.config({appid: 'cyxaAhbb6',conf: 'prod_6145588b29d62a9031690cf009c197f4'});</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="Jiang Zeshuo"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Jiang Zeshuo</p><p class="is-size-6 is-block">记录我不断拓展学识边界的征程。</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>北京</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">28</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">0</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">8</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/jiangzeshuo" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/jiangzeshuo"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Email" href="mailto:972653466@qq.com"><i class="fas fa-rss"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">Links</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li></ul></div></div></div><!--!--><div class="column-right-shadow is-hidden-widescreen"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-04-29T01:35:19.844Z">2024-04-29</time></p><p class="title"><a href="/2024/04/29/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E5%88%A9%E7%94%A8%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE/">1、用户数据分析</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-04-29T01:35:19.836Z">2024-04-29</time></p><p class="title"><a href="/2024/04/29/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D/">1、推荐系统简洁</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-04-29T01:31:44.948Z">2024-04-29</time></p><p class="title"><a href="/2024/04/29/Linux%E5%9F%BA%E7%A1%80/">Linux基础</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-04-29T01:28:44.507Z">2024-04-29</time></p><p class="title"><a href="/2024/04/29/Python%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">Python数据结构</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-04-29T01:27:22.129Z">2024-04-29</time></p><p class="title"><a href="/2024/04/29/%E6%89%8B%E5%86%99DQN/">手写DQN</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2024/04/"><span class="level-start"><span class="level-item">April 2024</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/03/"><span class="level-start"><span class="level-item">March 2024</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/02/"><span class="level-start"><span class="level-item">February 2024</span></span><span class="level-end"><span class="level-item tag">10</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/01/"><span class="level-start"><span class="level-item">January 2024</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AD%A6%E4%B9%A0/"><span class="tag">学习</span><span class="tag">15</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"><span class="tag">强化学习</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/"><span class="tag">推荐系统</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><span class="tag">数据结构</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"><span class="tag">深度学习</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/"><span class="tag">算法</span><span class="tag">11</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%87%8F%E5%AD%90%E5%AD%A6%E4%B9%A0/"><span class="tag">量子学习</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/avatar.png" alt="JzsBlog" height="28"></a><p class="is-size-7"><span>&copy; 2024 jzs</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p><p class="is-size-7">© 2019</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/jiangzeshuo"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
