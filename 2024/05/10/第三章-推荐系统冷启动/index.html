@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>推荐系统-冷启动问题 - JzsBlog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="JiangZeshuo"><meta name="msapplication-TileImage" content="/img/avatar.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="JiangZeshuo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="推荐系统冷启动问题主要分为三类  用户冷启动：用户冷启动主要解决如何给新用户做个性化推荐的问题。    物品冷启动  ：物品冷启动主要解决如何将新的物品推荐给可能对它感兴趣的用户这一问题    系统冷启动  ：系统冷启动主要解决如何在一个新开发的网站上（还没有用户，也没有用户行为，只有一些物品的信息）设计个性化推荐系统，"><meta property="og:type" content="blog"><meta property="og:title" content="推荐系统-冷启动问题"><meta property="og:url" content="https://jiangzeshuo.github.io/2024/05/10/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E5%86%B7%E5%90%AF%E5%8A%A8/"><meta property="og:site_name" content="JzsBlog"><meta property="og:description" content="推荐系统冷启动问题主要分为三类  用户冷启动：用户冷启动主要解决如何给新用户做个性化推荐的问题。    物品冷启动  ：物品冷启动主要解决如何将新的物品推荐给可能对它感兴趣的用户这一问题    系统冷启动  ：系统冷启动主要解决如何在一个新开发的网站上（还没有用户，也没有用户行为，只有一些物品的信息）设计个性化推荐系统，"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240505203028005.png"><meta property="og:image" content="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240505203222917.png"><meta property="og:image" content="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240505203943178.png"><meta property="og:image" content="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240505204456354.png"><meta property="og:image" content="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240505210002281.png"><meta property="og:image" content="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240505210344048.png"><meta property="og:image" content="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240505210409415.png"><meta property="article:published_time" content="2024-05-10T03:00:38.089Z"><meta property="article:modified_time" content="2024-05-10T03:01:27.743Z"><meta property="article:author" content="jzs"><meta property="article:tag" content="推荐系统"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240505203028005.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jiangzeshuo.github.io/2024/05/10/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E5%86%B7%E5%90%AF%E5%8A%A8/"},"headline":"推荐系统-冷启动问题","image":["https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240505203028005.png","https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240505203222917.png","https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240505203943178.png","https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240505204456354.png","https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240505210002281.png","https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240505210344048.png","https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240505210409415.png"],"datePublished":"2024-05-10T03:00:38.089Z","dateModified":"2024-05-10T03:01:27.743Z","author":{"@type":"Person","name":"jzs"},"publisher":{"@type":"Organization","name":"JzsBlog","logo":{"@type":"ImageObject","url":"https://jiangzeshuo.github.io/img/avatar.png"}},"description":"推荐系统冷启动问题主要分为三类  用户冷启动：用户冷启动主要解决如何给新用户做个性化推荐的问题。    物品冷启动  ：物品冷启动主要解决如何将新的物品推荐给可能对它感兴趣的用户这一问题    系统冷启动  ：系统冷启动主要解决如何在一个新开发的网站上（还没有用户，也没有用户行为，只有一些物品的信息）设计个性化推荐系统，"}</script><link rel="canonical" href="https://jiangzeshuo.github.io/2024/05/10/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E5%86%B7%E5%90%AF%E5%8A%A8/"><link rel="icon" href="/img/avatar.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/avatar.png" alt="JzsBlog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/jiangzeshuo"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2024-05-10T03:00:38.089Z" title="2024/5/10 11:00:38">2024-05-10</time></span><span class="level-item">Updated&nbsp;<time dateTime="2024-05-10T03:01:27.743Z" title="2024/5/10 11:01:27">2024-05-10</time></span><span class="level-item"><a class="link-muted" href="/categories/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/">推荐系统</a></span><span class="level-item">22 minutes read (About 3304 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">推荐系统-冷启动问题</h1><div class="content"><p>推荐系统冷启动问题主要分为三类</p>
+<ol>
+<li><p>用户冷启动：用户冷启动主要解决如何给新用户做个性化推荐的问题。  </p>
+</li>
+<li><p>物品冷启动  ：物品冷启动主要解决如何将新的物品推荐给可能对它感兴趣的用户这一问题  </p>
+</li>
+<li><p>系统冷启动  ：系统冷启动主要解决如何在一个新开发的网站上（还没有用户，也没有用户行为，只有一些物品的信息）设计个性化推荐系统，</p>
+<span id="more"></span>
+<p>可能得解决方案：</p>
+</li>
+<li><p>提供非个性化的推荐：热门排行榜，随机推荐</p>
+</li>
+<li><p>利用年龄等数据做粗粒度的个性化</p>
+</li>
+<li><p>通过社交账户登陆导入用户好友信息</p>
+</li>
+<li><p>登陆时收集用户兴趣信息</p>
+</li>
+<li><p>对于新加入的物品，可以利用内容信息  </p>
+</li>
+<li><p>在系统冷启动时，可以引入专家的知识，通过一定的高效方式迅速建立起物品的相关度表。</p>
+</li>
+</ol>
+<h1 id="利用用户注册信息"><a href="#利用用户注册信息" class="headerlink" title="利用用户注册信息"></a>利用用户注册信息</h1><p>用户的注册信息分3种：</p>
+<ol>
+<li><p>人口统计学信息 </p>
+<p>包括用户的年龄、性别、职业、民族、学历和居住地。</p>
+</li>
+<li><p>用户兴趣的描述</p>
+</li>
+</ol>
+<p>   有一些网站会让用户用文字描述他们的兴趣。</p>
+<ol start="3">
+<li><p>从其他网站导入的用户站外行为数据 </p>
+<p>比如用户通过豆瓣、新浪微博的账号登录，就可以在得到用户同意的情况下获取用户在豆瓣或者新浪微博的一些行为数据和社交网络数据。</p>
+</li>
+</ol>
+<h3 id="人口统计学"><a href="#人口统计学" class="headerlink" title="人口统计学"></a>人口统计学</h3><p>人口统计学特征包括年龄、性别、工作、学历、居住地、国籍、民族等，这些特征对预测用户的兴趣有很重要的作用，比如男性和女性的兴趣不同， 不同年龄的人兴趣也不同。  </p>
+<p>图3-3是一个基于用户人口统计学特征推荐的简单例子。如图所示，当一个新的注册用户访问推荐系统时，我们首先从用户注册信息数据库中查询他的注册信息。比如图3-3中的用户，我们查到他是一位28岁的男性，是一位物理学家。然后，查询3张离线计算好的相关表：一张是性别-电视剧相关表，从中可以查询男性最喜欢的电视剧；一张是年龄-电视剧相关表，从中可以查询到28岁用户最喜欢的电视剧；一张是职业-电视剧相关表，可以查询到物理学家最喜欢的电视剧。然后，我们可以将用这3张相关表查询出的电视剧列表按照一定权重相加，得到给用户的最终推荐列表。  </p>
+<p><img src="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240505203028005.png" alt="image-20240505203028005"></p>
+<p>所以我们需要计算对于某种特征的用户喜欢什么样的物品</p>
+<p>我们可以将${p(f,i)}$ 定义为喜欢物品i的用户中具有特征f的比例</p>
+<p><img src="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240505203222917.png" alt="image-20240505203222917"></p>
+<p>这里分母中使用参数$a$ 的目的是解决数据稀疏问题。比如有一个物品只被1个用户喜欢过，而这个用户刚好就有特征f，那么就有 ${p(f,i)&#x3D;1}$ 。但是，这种情况并没有统计意义，因此我们为分母加上一个比较大的数，可以避免这样的物品产生比较大的权重。  </p>
+<p>Lastfm数据集包含了更多的用户人口统计学信息，包括用户的性别、年龄和国籍。图3-4给出了该数据集中用户性别的分布。  </p>
+<p>我们准备用该数据集对比一下使用不同的人口统计学特征预测用户行为的精度。  在测试集中给每一类用户推荐${p(f,i)}$最高的10个物品，并通过准确率和召回率计算预测准确度。同时，我们也会计算推荐的覆盖率来评测推荐结果  </p>
+<ol>
+<li><p>MostPopular </p>
+<p>给用户推荐最热门的歌手。</p>
+</li>
+<li><p>GenderMostPopular </p>
+<p>给用户推荐对于和他同性别的用户最热门的歌手，这里我们将用户分成男女两类。</p>
+</li>
+<li><p>AgeMostPopular</p>
+</li>
+</ol>
+<p>   给用户推荐对于和他同一个年龄段的用户最热门的歌手，这里我们将10岁作为一个年龄段，将用户按照不同的年龄段分类。</p>
+<ol start="4">
+<li><p>CountryMostPopular </p>
+<p>给用户推荐对于和他同一个国家的用户最热门的歌手。</p>
+</li>
+<li><p>DemographicMostPopular</p>
+</li>
+</ol>
+<p>   给用户推荐对于和他同性别、年龄段、国家的用户最热门的歌手。</p>
+<p>这 4 种 算 法 具 有 不 同 的 粒 度 ， 其 中 MostPopular 粒 度 最 粗 ， 而DemographicMostPopular算法的粒度最细。结果显示利用的用户人口统计学特征越多，越能准确地预测用户兴趣。  </p>
+<p><img src="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240505203943178.png" alt="image-20240505203943178"></p>
+<h1 id="收集用户兴趣信息"><a href="#收集用户兴趣信息" class="headerlink" title="收集用户兴趣信息"></a>收集用户兴趣信息</h1><p>登录时用户提供一些物品，让用户反馈他们对这些物品的兴趣，然后根据用户反馈给提供个性化推荐</p>
+<p>启动用户兴趣的物品需要具有以下特点：</p>
+<ol>
+<li><p>比较热门 </p>
+<p>如果要让用户对一个物品进行反馈，前提是用户知道这个物品是什么东西。  </p>
+</li>
+<li><p>具有代表性和区分性</p>
+<p> 启动用户兴趣的物品不能是大众化或老少咸宜的，  </p>
+</li>
+<li><p>启动物品集合需要有多样性 </p>
+<p>在冷启动时，我们不知道用户的兴趣，而用户兴趣的可能性非常多，为了匹配多样的兴趣，我们需要提供具有很高覆盖率的启动物品集合</p>
+</li>
+</ol>
+<p>Nadav Golbandi  通过如下方式度量一个物品的区分度D(i):  </p>
+<p><img src="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240505204456354.png" alt="image-20240505204456354"></p>
+<p>其中，${N^{+}(i)}$是喜欢物品i的用户集合，${N^{-}(i)}$ 是不喜欢物品i的用户集合，$ {\overline{N}(i)}$是没有对物品i评分的用户集合。第一个是是喜欢物品i的用户对其他物品评分的方差，第二个是是不喜欢物品i的  用户对其他物品评分的方差， 第三个是没有对物品i评分的用户对其他物品评分的方差。也就是说，对于物品i， Nadav Golbandi将用户分成3类——喜欢物品i的用户、不喜欢物品i的用户和不知道物品i的用户（即没有给i评分的用户）。如果这3类用户集合内的用户对其他的物品兴趣很不一致，说明物品i具有较高的区分度。</p>
+<p>当用户对某个物品有兴趣时，他们对其他物品的评分方差较大可能表明以下几个情况：</p>
+<ol>
+<li><strong>多样性的反映</strong>: 用户对其他物品的评分分布较为广泛，涵盖了不同类型和风格的物品。这可能意味着用户的兴趣比较多元化，对不同类型的物品都有一定程度的兴趣。因此，这种情况下推荐系统需要更加细致地分析用户的兴趣，提供更加多样化和个性化的推荐，以满足用户的多样化需求。</li>
+<li><strong>较强的区分度</strong>: 当用户对其他物品的评分方差较大时，不同用户之间的兴趣差异可能较为显著。这意味着推荐系统可以更好地区分用户之间的兴趣差异，从而提供更具针对性的推荐。例如，对于具有较大评分方差的用户，推荐系统可以更加精细地调整推荐策略，提供更符合其个性化需求的推荐结果。</li>
+</ol>
+<p>并不是说这个物品很有区分度喜欢这个物品对其他物品的喜欢程度也相同，那么它可能并不符合热门</p>
+<p><strong>例子：</strong>通过一个简单的例子解释Nadav Golbandi的算法。如图所示，假设通过分析用户数据，我们发现《变形金刚》最有区分度。而在喜欢《变形金刚》的用户中《钢铁侠》最有区分度，不知道《变形金刚》的用户中《阿甘正传》最有区分度，不喜欢《变形金刚》的用户中《泰坦尼克号》最有区分度。进一步分析，我们发现不喜欢《变形金刚》但喜欢《泰坦尼克号》的用户中，《人鬼情未了》最有区分度。那么，假设来了一个新用户，系统会首先询问他对《变形金刚》的看法，如果他说不喜欢，我们就会问他对《泰坦尼克》号的看法，如果他说喜欢，我们就会问他对《人鬼情未了》的看法，如果这个时候用户停止了反馈，我们也大概能知道该用户可能对爱情片比较感兴趣，对科幻片兴趣不大。  </p>
+<p><img src="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240505210002281.png" alt="image-20240505210002281"></p>
+<h1 id="利用物品的内容信息"><a href="#利用物品的内容信息" class="headerlink" title="利用物品的内容信息"></a>利用物品的内容信息</h1><p>首先需要指出的是， UserCF算法对物品冷启动问题并不非常敏感。因为， UserCF在给用户进行推荐时，会首先找到和用户兴趣相似的一群用户，然后给用户推荐这一群用户喜欢的物品。在很多网站中，推荐列表并不是给用户展示内容的唯一列表，那么当一个新物品加入时，总会有用户从某些途径看到这些物品，对这些物品产生反馈。因此该物品就能不断地扩散开来，从而逐步展示到对它感兴趣用户的推荐列表中  </p>
+<p>对于ItemCF算法来说，物品冷启动就是一个严重的问题了。因为ItemCF算法的原理是给用户推荐和他之前喜欢的物品相似的物品。 ItemCF算法会每隔一段时间利用用户行为计算物品相似度表（一般一天计算一次），在线服务时ItemCF算法会将之前计算好的物品相关度矩阵放在内存中。因此，当新物品加入时，内存中的物品相关表中不会存在这个物品，从而ItemCF算法无法推荐新的物品。解决这一问题的办法是频繁更新物品相似度表，但基于用户行为计算物品相似度是非常耗时的事情，主要原因是用户行为日志非常庞大。而且，新物品如果不展示给用户，用户就无法对它产生行为，通过行为日志计算是计算不出包含新物品的相关矩阵的。为此，我们只能利用物品的内容信息计算物品相关表，并且频繁地更新相关表（比如半小时计算一次）。  </p>
+<p>因为我们需要根据物品的内容和信息对物品打上标签</p>
+<p>对物品d，它的内容表示成一个关键词向量如下：  </p>
+<p><img src="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240505210344048.png" alt="image-20240505210344048"></p>
+<p>其中， ei 就是关键词， wi 是关键词对应的权重。  </p>
+<p>在给定物品内容的关键词向量后，物品的内容相似度可以通过向量之间的余弦相似度计算：  </p>
+<p><img src="https://imgs-1304492658.cos.ap-beijing.myqcloud.com/imgs/image-20240505210409415.png" alt="image-20240505210409415"></p>
+<p>可以采用第二章的倒排表加速这一计算过程在得道相似度之后可以利用上一章提到的ItemCF算法的思想，给用户推荐和他历史上喜欢的物品内容相似的物品。  </p>
+<h1 id="专家经验标注"><a href="#专家经验标注" class="headerlink" title="专家经验标注"></a>专家经验标注</h1><p>首先，它让专家对电影进行标记，每个电影都有大约50个基因，这些基因来自大约1000个基因库。然后，在专家标记一定的样本后， Jinni会使用自然语言理解和机器学习技术，通过分析用户对电影的评论和电影的一些内容属性对电影（特别是新电影）进行自己的标记。同时， Jinni也设计了让用户对基因进行反馈的界面，希望通过用户反馈不断改进电影基因系统。  </p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>推荐系统-冷启动问题</p><p><a href="https://jiangzeshuo.github.io/2024/05/10/第三章-推荐系统冷启动/">https://jiangzeshuo.github.io/2024/05/10/第三章-推荐系统冷启动/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>jzs</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2024-05-10</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2024-05-10</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/">推荐系统</a></div><div class="bdsharebuttonbox"><a class="bds_more" href="#" data-cmd="more"></a><a class="bds_qzone" href="#" data-cmd="qzone" title="分享到QQ空间"></a><a class="bds_tsina" href="#" data-cmd="tsina" title="分享到新浪微博"></a><a class="bds_tqq" href="#" data-cmd="tqq" title="分享到腾讯微博"></a><a class="bds_renren" href="#" data-cmd="renren" title="分享到人人网"></a><a class="bds_weixin" href="#" data-cmd="weixin" title="分享到微信"></a></div><script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2024/05/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E5%88%A9%E7%94%A8%E7%94%A8%E6%88%B7%E6%A0%87%E7%AD%BE/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">推荐系统-利用用户标签</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2024/05/10/%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%88%A9%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BF%A1%E6%81%AF/"><span class="level-item">推荐系统-时间上下文需求</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="SOHUCS" sid="2024/05/10/第三章-推荐系统冷启动/"></div><script charset="utf-8" src="https://changyan.sohu.com/upload/changyan.js"></script><script>window.changyan.api.config({appid: 'cyxaAhbb6',conf: 'prod_6145588b29d62a9031690cf009c197f4'});</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="Jiang Zeshuo"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Jiang Zeshuo</p><p class="is-size-6 is-block">记录我不断拓展学识边界的征程。</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>北京</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">31</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">15</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">8</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/jiangzeshuo" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/jiangzeshuo"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Email" href="mailto:972653466@qq.com"><i class="fas fa-rss"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">Links</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/"><span class="level-start"><span class="level-item">推荐系统</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%A7%91%E7%A0%94/"><span class="level-start"><span class="level-item">科研</span></span><span class="level-end"><span class="level-item tag">3</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E7%A7%91%E7%A0%94/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"><span class="level-start"><span class="level-item">强化学习</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/"><span class="level-start"><span class="level-item">算法</span></span><span class="level-end"><span class="level-item tag">19</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%8F%89%E6%A0%91/"><span class="level-start"><span class="level-item">二叉树</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"><span class="level-start"><span class="level-item">动态规划</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/%E5%8D%95%E8%B0%83%E6%A0%88/"><span class="level-start"><span class="level-item">单调栈</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/%E5%93%88%E5%B8%8C%E8%A1%A8/"><span class="level-start"><span class="level-item">哈希表</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%9E%E6%BA%AF/"><span class="level-start"><span class="level-item">回溯</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/%E5%AD%97%E7%AC%A6%E4%B8%B2/"><span class="level-start"><span class="level-item">字符串</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E7%BB%84/"><span class="level-start"><span class="level-item">数组</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97/"><span class="level-start"><span class="level-item">栈与队列</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/%E8%B4%AA%E5%BF%83/"><span class="level-start"><span class="level-item">贪心</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E7%AE%97%E6%B3%95/%E9%93%BE%E8%A1%A8/"><span class="level-start"><span class="level-item">链表</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"><span class="level-start"><span class="level-item">计算机基础</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-05-10T03:00:38.108Z">2024-05-10</time></p><p class="title"><a href="/2024/05/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E5%88%A9%E7%94%A8%E7%94%A8%E6%88%B7%E6%A0%87%E7%AD%BE/">推荐系统-利用用户标签</a></p><p class="categories"><a href="/categories/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/">推荐系统</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-05-10T03:00:38.089Z">2024-05-10</time></p><p class="title"><a href="/2024/05/10/%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E5%86%B7%E5%90%AF%E5%8A%A8/">推荐系统-冷启动问题</a></p><p class="categories"><a href="/categories/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/">推荐系统</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-05-10T03:00:38.036Z">2024-05-10</time></p><p class="title"><a href="/2024/05/10/%E7%AC%AC%E4%BA%94%E7%AB%A0-%E5%88%A9%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BF%A1%E6%81%AF/">推荐系统-时间上下文需求</a></p><p class="categories"><a href="/categories/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/">推荐系统</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-04-29T01:35:19.844Z">2024-04-29</time></p><p class="title"><a href="/2024/04/29/%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E5%88%A9%E7%94%A8%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE/">推荐系统-用户数据分析</a></p><p class="categories"><a href="/categories/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/">推荐系统</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-04-29T01:35:19.836Z">2024-04-29</time></p><p class="title"><a href="/2024/04/29/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D/">推荐系统-推荐系统简介</a></p><p class="categories"><a href="/categories/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/">推荐系统</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2024/05/"><span class="level-start"><span class="level-item">May 2024</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/04/"><span class="level-start"><span class="level-item">April 2024</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/03/"><span class="level-start"><span class="level-item">March 2024</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/02/"><span class="level-start"><span class="level-item">February 2024</span></span><span class="level-end"><span class="level-item tag">10</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/01/"><span class="level-start"><span class="level-item">January 2024</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%AD%A6%E4%B9%A0/"><span class="tag">学习</span><span class="tag">15</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"><span class="tag">强化学习</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/"><span class="tag">推荐系统</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><span class="tag">数据结构</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"><span class="tag">深度学习</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AE%97%E6%B3%95/"><span class="tag">算法</span><span class="tag">11</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%87%8F%E5%AD%90%E5%AD%A6%E4%B9%A0/"><span class="tag">量子学习</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/avatar.png" alt="JzsBlog" height="28"></a><p class="is-size-7"><span>&copy; 2024 jzs</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p><p class="is-size-7">© 2019</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/jiangzeshuo"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
